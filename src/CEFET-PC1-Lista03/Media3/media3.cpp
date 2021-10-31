@@ -61,10 +61,10 @@ int main() {
     float novaMedia = (media + notaExameEspecial) / 2;
 
     if (novaMedia >= 5) {
-        cout << "Aluno aprovado\n";
+        cout << "Aluno aprovado.\n";
     }
     else {
-        cout << "Aluno reprovado\n";
+        cout << "Aluno reprovado.\n";
     }
 
     cout << "Media final: " << novaMedia << "\n";
