@@ -21,10 +21,9 @@ int main() {
 
     for (int i = 0; i < matrixOrders.size(); i++) {
         buildMatrix(matrixOrders[i]);
-        if (i < matrixOrders.size() - 1) {
-            cout << "\n";
-        }
+        cout << "\n";
     }
+    cout << "\n";
     
     return 0;
 }
