@@ -17,6 +17,7 @@ int main() {
 
         matrixOrders.push_back(order);
     } while (order != 0);
+    matrixOrders.pop_back();
 
     for (int i = 0; i < matrixOrders.size(); i++) {
         buildMatrix(matrixOrders[i]);
@@ -55,7 +56,7 @@ void buildMatrix(const int order) {
 void printMatrix(const vector<vector<int>> matrix, const int order) {
     for (int i = 0; i < order; i++) {
         cout << "  ";
-
+        
         for (int j = 0; j < order; j++) {
             cout << matrix[i][j];
             if (j < order - 1) {
