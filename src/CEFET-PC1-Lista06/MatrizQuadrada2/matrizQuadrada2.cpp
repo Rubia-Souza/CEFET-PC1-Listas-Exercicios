@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <vector>
 
 using namespace std;
@@ -23,7 +24,6 @@ int main() {
         buildMatrix(matrixOrders[i]);
         cout << "\n";
     }
-    cout << "\n";
     
     return 0;
 }
@@ -54,12 +54,14 @@ void buildMatrix(const int order) {
 
 void printMatrix(const vector<vector<int>> matrix, const int order) {
     for (int i = 0; i < order; i++) {
-        cout << "  ";
-        
+        cout << setfill(' ') << setw(3);
         for (int j = 0; j < order; j++) {
+            if (j == 0) {
+            }
+
             cout << matrix[i][j];
             if (j < order - 1) {
-                cout << "   ";
+                cout << " " << setfill(' ') << setw(3);
             }
         }
 
