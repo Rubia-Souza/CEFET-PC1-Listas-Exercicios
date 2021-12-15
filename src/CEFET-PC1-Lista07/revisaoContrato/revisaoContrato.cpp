@@ -7,7 +7,7 @@ using namespace std;
 void getUserInput(char *outProblematicNumber, string *outContractNumber);
 void splitString(const string target, const char splitPoint, vector<string> *outVector);
 string formattNumberInLine(const string line);
-bool isStringOneSingleCharacter(const string line, const char referenceCharacter);
+string removeLeftZeros(const string line);
 string removeCharacter(const string target, const char character);
 
 int main() {
@@ -32,8 +32,7 @@ void getUserInput(char *outProblematicNumber, string *outContractNumber) {
     string inputLine = "";
     vector<string> splitedLine;
 
-    int problematicNumber = 0;
-    unsigned long long contractNumber = 0;
+    unsigned int problematicNumber = 0, contractNumber = 0;
 
     do {
         getline(cin, inputLine);
@@ -41,11 +40,15 @@ void getUserInput(char *outProblematicNumber, string *outContractNumber) {
         splitString(inputLine, ' ', &splitedLine);
 
         problematicNumber = stoi(splitedLine[0]);
-        contractNumber = stoull(splitedLine[1]);
+        
+        string firstPartOfContractNumber = "";
+        firstPartOfContractNumber.push_back(splitedLine[1][0]);
+        firstPartOfContractNumber.push_back(splitedLine[1][1]);
+        contractNumber = stoi(firstPartOfContractNumber);
     } while (problematicNumber < 0 || problematicNumber > 9 || contractNumber < 0);
 
-    *outProblematicNumber = '0' + problematicNumber;
-    *outContractNumber = to_string(contractNumber);
+    *outProblematicNumber = splitedLine[0][0];
+    *outContractNumber = splitedLine[1];
 
     return;
 }
@@ -73,26 +76,31 @@ void splitString(const string target, const char splitPoint, vector<string> *out
 }
 
 string formattNumberInLine(const string line) {
-    string result = line;
+    string result = removeLeftZeros(line);
 
     if (line.length() == 0) {
-        result = "1";
-    }
-    else if (line.length() > 1 && isStringOneSingleCharacter(line, '0')) {
         result = "0";
     }
 
     return result;
 }
 
-bool isStringOneSingleCharacter(const string line, const char referenceCharacter) {
-    for (int i = 1; i < line.length(); i++) {
-        if (referenceCharacter != line[i]) {
-            return false;
+string removeLeftZeros(const string line) {
+    string result = "";
+    bool hasFoundNumberDiferentThanZero = false;
+
+    for (int i = 0; i < line.length(); i++) {
+        char actualCharacter = line[i];
+        if (actualCharacter != '0' & !hasFoundNumberDiferentThanZero) {
+            hasFoundNumberDiferentThanZero = true;
+        }
+        
+        if (hasFoundNumberDiferentThanZero || i == line.length() - 1) {
+            result.push_back(actualCharacter);
         }
     }
-    
-    return true;
+
+    return result;
 }
 
 string removeCharacter(const string target, const char character) {
