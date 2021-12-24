@@ -59,8 +59,6 @@ void fillMap(map<char, int> *outMap) {
 }
 
 void checkLettersFrequencys(const string refString, map<char, int> *outMap) {
-    map<char, int>::iterator outMapIterator;
-
     for (int i = 0; i < refString.length(); i++) {
         char actualCharacter = refString[i];
         if (isalpha(actualCharacter)) {
